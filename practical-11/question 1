@@ -1,0 +1,45 @@
+/*
+Write a program to create a file and perform basic I/O operations on the same.
+*/
+
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    char data[100];
+
+    // Create a file named "my_file.txt" in write mode ("w")
+    fp = fopen("my_file.txt", "w");
+
+    // Check if file opened successfully
+    if (fp == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+
+    // Write data to the file
+    printf("Enter some data to write to the file: ");
+    fgets(data, 100, stdin);  // Read data from user with fgets
+    fprintf(fp, "%s", data);
+
+    // Close the file for writing
+    fclose(fp);
+
+    // Now open the same file in read mode ("r")
+    fp = fopen("my_file.txt", "r");
+
+    if (fp == NULL) {
+        printf("Error opening file for reading!\n");
+        return 1;
+    }
+
+    // Read data from the file
+    printf("Reading data from the file:\n");
+    fgets(data, 100, fp);
+    printf("%s", data);
+
+    // Close the file for reading
+    fclose(fp);
+
+    return 0;
+}
